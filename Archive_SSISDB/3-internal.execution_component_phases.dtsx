@@ -1,0 +1,904 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/24/2021 8:50:14 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="VDEMO17"
+  DTS:CreatorName="VDEMO17\A. Ray Leonard"
+  DTS:DTSID="{81AF86A2-2610-43B2-A964-287E4F9A7EA0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.128"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="3-internal execution_component_phases"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{3B99A63F-7F61-4C14-ADA1-11FD1A736A53}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT internal_execution_component_phases"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1E6C357E-F865-4D33-949B-B6B1F0670A03}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT internal_execution_component_phases"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LkUp New Rows Only"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select [phase_stats_id]
+ 
+
+
+From [internal].[execution_component_phases]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (Select [phase_stats_id]
+ 
+
+
+From [internal].[execution_component_phases]) [refTable]
+where [refTable].[phase_stats_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="phase_stats_id" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_stats_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Connections[OleDbConnection]"
+                  connectionManagerID="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ArchiveSSISDB.OLEDB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Inputs[Lookup Input].Columns[phase_stats_id]"
+                      cachedDataType="i8"
+                      cachedName="phase_stats_id"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_stats_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">phase_stats_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDBDest internal_execution_component_phases"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[internal].[execution_component_phases]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Connections[OleDbConnection]"
+                  connectionManagerID="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ArchiveSSISDB.OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[phase_stats_id]"
+                      cachedDataType="i8"
+                      cachedName="phase_stats_id"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[phase_stats_id]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_stats_id]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[execution_id]"
+                      cachedDataType="i8"
+                      cachedName="execution_id"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[execution_id]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[execution_id]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[package_name]"
+                      cachedDataType="wstr"
+                      cachedLength="260"
+                      cachedName="package_name"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[package_name]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_name]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[package_location_type]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="package_location_type"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[package_location_type]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_location_type]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[package_path_full]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="package_path_full"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[package_path_full]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_path_full]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[task_name]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="task_name"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[task_name]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[task_name]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[subcomponent_name]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="subcomponent_name"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[subcomponent_name]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[subcomponent_name]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[phase]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="phase"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[phase]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[is_start]"
+                      cachedDataType="bool"
+                      cachedName="is_start"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[is_start]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[is_start]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[phase_time]"
+                      cachedDataType="dbTimeStampOffset"
+                      cachedName="phase_time"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[phase_time]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_time]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[execution_path]"
+                      cachedDataType="nText"
+                      cachedName="execution_path"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[execution_path]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[execution_path]" />
+                    <inputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].Columns[sequence_id]"
+                      cachedDataType="i4"
+                      cachedName="sequence_id"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[sequence_id]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[sequence_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[phase_stats_id]"
+                      dataType="i8"
+                      name="phase_stats_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[execution_id]"
+                      dataType="i8"
+                      name="execution_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[package_name]"
+                      dataType="wstr"
+                      length="260"
+                      name="package_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[package_location_type]"
+                      dataType="wstr"
+                      length="128"
+                      name="package_location_type" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[package_path_full]"
+                      dataType="wstr"
+                      length="4000"
+                      name="package_path_full" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[task_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="task_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[subcomponent_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="subcomponent_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[phase]"
+                      dataType="wstr"
+                      length="128"
+                      name="phase" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[is_start]"
+                      dataType="bool"
+                      name="is_start" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[phase_time]"
+                      dataType="dbTimeStampOffset"
+                      name="phase_time"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[execution_path]"
+                      dataType="nText"
+                      name="execution_path" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input].ExternalColumns[sequence_id]"
+                      dataType="i4"
+                      name="sequence_id" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLEDBSrc Select internal_execution_component_phases"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select [phase_stats_id]
+      ,[execution_id]
+      ,[package_name]
+      ,[package_location_type]
+      ,[package_path_full]
+      ,[task_name]
+      ,[subcomponent_name]
+      ,[phase]
+      ,[is_start]
+      ,[phase_time]
+      ,[execution_path]
+      ,[sequence_id]
+From [internal].[execution_component_phases]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Connections[OleDbConnection]"
+                  connectionManagerID="{3612104A-85E2-414C-A915-13775D72E186}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SSISDB.OLEDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_stats_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[phase_stats_id]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_stats_id]"
+                      name="phase_stats_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[execution_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[execution_id]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[execution_id]"
+                      name="execution_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[package_name]"
+                      length="260"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_name]"
+                      name="package_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_location_type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[package_location_type]"
+                      length="128"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_location_type]"
+                      name="package_location_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_path_full]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[package_path_full]"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[package_path_full]"
+                      name="package_path_full"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[task_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[task_name]"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[task_name]"
+                      name="task_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[subcomponent_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[subcomponent_name]"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[subcomponent_name]"
+                      name="subcomponent_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[phase]"
+                      length="128"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase]"
+                      name="phase"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[is_start]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[is_start]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[is_start]"
+                      name="is_start"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_time]"
+                      dataType="dbTimeStampOffset"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[phase_time]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[phase_time]"
+                      name="phase_time"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[execution_path]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[execution_path]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[execution_path]"
+                      name="execution_path"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[sequence_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[sequence_id]"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].Columns[sequence_id]"
+                      name="sequence_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[phase_stats_id]"
+                      dataType="i8"
+                      name="phase_stats_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[execution_id]"
+                      dataType="i8"
+                      name="execution_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[package_name]"
+                      dataType="wstr"
+                      length="260"
+                      name="package_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[package_location_type]"
+                      dataType="wstr"
+                      length="128"
+                      name="package_location_type" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[package_path_full]"
+                      dataType="wstr"
+                      length="4000"
+                      name="package_path_full" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[task_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="task_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[subcomponent_name]"
+                      dataType="wstr"
+                      length="4000"
+                      name="subcomponent_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[phase]"
+                      dataType="wstr"
+                      length="128"
+                      name="phase" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[is_start]"
+                      dataType="bool"
+                      name="is_start" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[phase_time]"
+                      dataType="dbTimeStampOffset"
+                      name="phase_time"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[execution_path]"
+                      dataType="nText"
+                      name="execution_path" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output].ExternalColumns[sequence_id]"
+                      dataType="i4"
+                      name="sequence_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[phase_stats_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[phase_stats_id]"
+                      name="phase_stats_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[execution_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[execution_id]"
+                      name="execution_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[package_name]"
+                      dataType="wstr"
+                      length="260"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[package_name]"
+                      name="package_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[package_location_type]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[package_location_type]"
+                      name="package_location_type" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[package_path_full]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[package_path_full]"
+                      name="package_path_full" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[task_name]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[task_name]"
+                      name="task_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[subcomponent_name]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[subcomponent_name]"
+                      name="subcomponent_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[phase]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[phase]"
+                      name="phase" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[is_start]"
+                      dataType="bool"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[is_start]"
+                      name="is_start" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[phase_time]"
+                      dataType="dbTimeStampOffset"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[phase_time]"
+                      name="phase_time"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[execution_path]"
+                      dataType="nText"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[execution_path]"
+                      name="execution_path" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[sequence_id]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[sequence_id]"
+                      name="sequence_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT internal_execution_component_phases.Paths[Lookup No Match Output]"
+              endId="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT internal_execution_component_phases.Paths[OLE DB Source Output]"
+              endId="Package\DFT internal_execution_component_phases\LkUp New Rows Only.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="295,42"
+          Id="Package\DFT internal_execution_component_phases"
+          TopLeft="40.5,34.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT internal_execution_component_phases">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="333,42"
+          Id="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases"
+          TopLeft="122.5,279.5" />
+        <NodeLayout
+          Size="361,42"
+          Id="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases"
+          TopLeft="108.5,75.5" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\DFT internal_execution_component_phases\LkUp New Rows Only"
+          TopLeft="196,177.5" />
+        <EdgeLayout
+          Id="Package\DFT internal_execution_component_phases.Paths[OLE DB Source Output]"
+          TopLeft="289,117.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_execution_component_phases.Paths[Lookup No Match Output]"
+          TopLeft="289,219.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,20.4453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_execution_component_phases\OLEDBDest internal_execution_component_phases">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_execution_component_phases\OLEDBSrc Select internal_execution_component_phases">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_execution_component_phases\LkUp New Rows Only">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

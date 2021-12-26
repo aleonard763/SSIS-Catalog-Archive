@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="ArchiveSSISDB.OLEDB"
+  DTS:DTSID="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=(local)\Demo;Initial Catalog=SSISDBArchive;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=[SSIS].ArchiveSSISDB.ArchiveSSISDB.OLEDB;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
