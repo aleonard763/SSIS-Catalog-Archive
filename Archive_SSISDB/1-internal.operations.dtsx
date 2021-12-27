@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="1-internal operations"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{B0CBB157-3A9A-43E6-B77E-F240EF913DA8}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{EA9E2B5A-85A0-4D7F-8AC5-0722EAE3C4FD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -31,6 +31,152 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\DFT internal_operations\LkUp etl_operation_id"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LkUp etl_operation_id"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select [operation_id] 
+From [etl].[operation_id]
+Where [status_flag] = 'N'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (Select [operation_id] 
+From [etl].[operation_id]
+Where [status_flag] = 'N') [refTable]
+where [refTable].[operation_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="operation_id" dataType="DT_I8" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT internal_operations\OLEDBSrc Select internal_operations.Outputs[OLE DB Source Output].Columns[operation_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT internal_operations\LkUp etl_operation_id.Connections[OleDbConnection]"
+                  connectionManagerID="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[ArchiveSSISDB.OLEDB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT internal_operations\LkUp etl_operation_id.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_operations\LkUp etl_operation_id.Inputs[Lookup Input].Columns[operation_id]"
+                      cachedDataType="i8"
+                      cachedName="operation_id"
+                      lineageId="Package\DFT internal_operations\OLEDBSrc Select internal_operations.Outputs[OLE DB Source Output].Columns[operation_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">operation_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT internal_operations\LkUp etl_operation_id.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT internal_operations\LkUp etl_operation_id.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT internal_operations\LkUp etl_operation_id.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\DFT internal_operations\LkUp New Rows Only"
               componentClassID="Microsoft.Lookup"
@@ -973,8 +1119,13 @@ From [internal].[operations]</property>
           </components>
           <paths>
             <path
-              refId="Package\DFT internal_operations.Paths[Lookup No Match Output]"
+              refId="Package\DFT internal_operations.Paths[Lookup Match Output]"
               endId="Package\DFT internal_operations\OLEDBDest internal_operations.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\DFT internal_operations\LkUp etl_operation_id.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT internal_operations.Paths[Lookup No Match Output]"
+              endId="Package\DFT internal_operations\LkUp etl_operation_id.Inputs[Lookup Input]"
               name="Lookup No Match Output"
               startId="Package\DFT internal_operations\LkUp New Rows Only.Outputs[Lookup No Match Output]" />
             <path
@@ -1014,18 +1165,18 @@ From [internal].[operations]</property>
         <NodeLayout
           Size="236,42"
           Id="Package\DFT internal_operations\OLEDBDest internal_operations"
-          TopLeft="147,276.5" />
+          TopLeft="150,375.5" />
         <NodeLayout
           Size="263,42"
           Id="Package\DFT internal_operations\OLEDBSrc Select internal_operations"
-          TopLeft="133.5,72.5" />
+          TopLeft="136.5,69.5" />
         <NodeLayout
           Size="186,42"
           Id="Package\DFT internal_operations\LkUp New Rows Only"
-          TopLeft="172,174.5" />
+          TopLeft="175,171.5" />
         <EdgeLayout
           Id="Package\DFT internal_operations.Paths[OLE DB Source Output]"
-          TopLeft="265,114.5">
+          TopLeft="268,111.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1045,9 +1196,13 @@ From [internal].[operations]</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="186,42"
+          Id="Package\DFT internal_operations\LkUp etl_operation_id"
+          TopLeft="175,273.5" />
         <EdgeLayout
           Id="Package\DFT internal_operations.Paths[Lookup No Match Output]"
-          TopLeft="265,216.5">
+          TopLeft="268,213.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1066,6 +1221,30 @@ From [internal].[operations]</property>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
               BoundingBox="-55.80638671875,20.4453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_operations.Paths[Lookup Match Output]"
+          TopLeft="268,315.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1110,6 +1289,29 @@ From [internal].[operations]</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_operations\LkUp etl_operation_id">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>

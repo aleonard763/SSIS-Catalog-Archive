@@ -5,6 +5,6 @@
   DTS:CreationName="OLEDB">
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Data Source=(local)\Demo;Initial Catalog=SSISDBArchive;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=[SSIS].ArchiveSSISDB.ArchiveSSISDB.OLEDB;" />
+      DTS:ConnectionString="Data Source=(local)\Nf;Initial Catalog=SSISDBArchive;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=[SSIS].ArchiveSSISDB.ArchiveSSISDB.OLEDB;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>
