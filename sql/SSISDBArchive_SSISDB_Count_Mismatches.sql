@@ -1,7 +1,21 @@
 Use SSISDB
 go
 
-declare @MatchedTablesCount int = 0
+print '-------------------------------------------------'
+print ' SSISDB - SSISDBArchive Counts Validation Script '
+print '-------------------------------------------------'
+print ''
+
+print 'SSISDB Archive database check'
+print ''
+
+If Exists (Select [name]
+           From [sys].[databases]
+		   Where [name] = N'SSISDBArchive')
+ begin
+
+  declare @MatchedTablesCount int = 0
+  declare @MisMatchedTablesCount int = 0
 
 if(
    (Select Count(*) As OperationsCount
@@ -12,6 +26,7 @@ if(
   )
  begin
   print 'internal.operations count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -27,6 +42,7 @@ if(
   )
  begin
   print 'internal.executables count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -42,6 +58,7 @@ if(
   )
  begin
   print 'internal.executions count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -57,6 +74,7 @@ if(
   )
  begin
   print 'internal.validations count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -72,6 +90,7 @@ if(
   )
  begin
   print 'internal.operation_os_sys_info count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -87,6 +106,7 @@ if(
   )
  begin
   print 'internal.operation_messages count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -102,6 +122,7 @@ if(
   )
  begin
   print 'internal.extended_operation_info count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -117,6 +138,7 @@ if(
   )
  begin
   print 'internal.event_messages count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -132,6 +154,7 @@ if(
   )
  begin
   print 'internal.execution_component_phases count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -147,6 +170,7 @@ if(
   )
  begin
   print 'internal.executable_statistics count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -162,6 +186,7 @@ if(
   )
  begin
   print 'internal.execution_data_taps count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -177,6 +202,7 @@ if(
   )
  begin
   print 'internal.execution_parameter_values count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -192,6 +218,7 @@ if(
   )
  begin
   print 'internal.execution_property_override_values count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -207,6 +234,7 @@ if(
   )
  begin
   print 'internal.execution_data_statistics count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -222,6 +250,7 @@ if(
   )
  begin
   print 'internal.event_message_context count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
@@ -237,10 +266,22 @@ if(
   )
  begin
   print 'internal.operation_permissions count mismatch'
+  Set @MisMatchedTablesCount = @MisMatchedTablesCount + 1
  end
 else
  begin
   Set @MatchedTablesCount = @MatchedTablesCount + 1
+ end
+
+if(@MisMatchedTablesCount > 0)
+ begin
+  print ''
+  print Convert(varchar(12), @MisMatchedTablesCount) + ' tables mismatched.'
+  print ''
+  print 'Counts for internal.operation_messages, internal.event_messages,
+internal.executable_statistics, and internal.event_message_context
+may not match if the Archive_SSISDB project is executed in the SSIS Catalog.
+This is not as much by design as by the nature of the SSIS Catalog.'
  end
 
 if(@MatchedTablesCount > 0)
@@ -249,3 +290,8 @@ if(@MatchedTablesCount > 0)
   print Convert(varchar(12), @MatchedTablesCount) + ' tables matched.'
  end
 
+ end
+Else
+ begin
+  print ' - SSISDBArchive database does not exist.'
+ end

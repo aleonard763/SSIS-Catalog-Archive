@@ -48,6 +48,23 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+print 'etl Schema'
+If Not Exists(Select [name]
+              From [sys].[schemas]
+			  Where [name] = N'etl')
+ begin
+  print ' - Creating etl Schema'
+  declare @etlSchemaSql varchar(100) = 'Create Schema etl'
+  exec(@etlSchemaSql)
+  print ' - etl Schema created'
+ end
+Else
+ begin
+  print ' - etl Schema already exists.'
+ end
+print ''
+go
+
 print 'internal Schema'
 If Not Exists(Select [name]
               From [sys].[schemas]
@@ -73,6 +90,114 @@ If Exists(Select [name]
   print ''
   print ' - creating internal schema tables'
   print ''
+
+print 'etl.operation_id table'
+If Not Exists(Select s.[name] + '.' + t.[name]
+              From [sys].[tables] t
+			  Join [sys].[schemas] s
+			    On s.[schema_id] = t.[schema_id]
+			  Where s.[name] = N'etl'
+			    And t.[name] = N'operation_id')
+ begin
+  print ' - Creating etl.operation_id table'
+  Create Table etl.operation_id
+  (
+	[operation_id] [bigint] NOT NULL
+	 Constraint PK_Operation_Id
+	  Primary Key
+	   Clustered
+ , [status_flag] char(1) Not NULL
+	 Constraint DF_Operation_Id_Status_Flag 
+	  Default ('N')
+  )
+  print ' - etl.operation_id table created'
+ end
+Else
+ begin
+  print ' - etl.operation_id table already exists.'
+ end
+print ''
+
+print 'etl.execution_id table'
+If Not Exists(Select s.[name] + '.' + t.[name]
+              From [sys].[tables] t
+			  Join [sys].[schemas] s
+			    On s.[schema_id] = t.[schema_id]
+			  Where s.[name] = N'etl'
+			    And t.[name] = N'execution_id')
+ begin
+  print ' - Creating etl.execution_id table'
+  Create Table etl.execution_id
+  (
+	[execution_id] [bigint] NOT NULL
+	 Constraint PK_Execution_Id
+	  Primary Key
+	   Clustered
+ , [status_flag] char(1) Not NULL
+	 Constraint DF_Execution_Id_Status_Flag 
+	  Default ('N')
+  )
+  print ' - etl.execution_id table created'
+ end
+Else
+ begin
+  print ' - etl.execution_id table already exists.'
+ end
+print ''
+
+print 'etl.executable_id table'
+If Not Exists(Select s.[name] + '.' + t.[name]
+              From [sys].[tables] t
+			  Join [sys].[schemas] s
+			    On s.[schema_id] = t.[schema_id]
+			  Where s.[name] = N'etl'
+			    And t.[name] = N'executable_id')
+ begin
+  print ' - Creating etl.executable_id table'
+  Create Table etl.executable_id
+  (
+	[executable_id] [bigint] NOT NULL
+	 Constraint PK_Executable_Id
+	  Primary Key
+	   Clustered
+ , [status_flag] char(1) Not NULL
+	 Constraint DF_Executable_Id_Status_Flag 
+	  Default ('N')
+  )
+  print ' - etl.executable_id table created'
+ end
+Else
+ begin
+  print ' - etl.executable_id table already exists.'
+ end
+print ''
+
+print 'etl.validation_id table'
+If Not Exists(Select s.[name] + '.' + t.[name]
+              From [sys].[tables] t
+			  Join [sys].[schemas] s
+			    On s.[schema_id] = t.[schema_id]
+			  Where s.[name] = N'etl'
+			    And t.[name] = N'validation_id')
+ begin
+  print ' - Creating etl.validation_id table'
+  Create Table etl.validation_id
+  (
+	[validation_id] [bigint] NOT NULL
+	 Constraint PK_Validation_Id
+	  Primary Key
+	   Clustered
+ , [status_flag] char(1) Not NULL
+	 Constraint DF_Validation_Id_Status_Flag 
+	  Default ('N')
+  )
+  print ' - etl.validation_id table created'
+ end
+Else
+ begin
+  print ' - etl.validation_id table already exists.'
+ end
+print ''
 
 print 'internal.event_message_context table'
 If Not Exists(Select s.[name] + '.' + t.[name]
@@ -105,7 +230,6 @@ Else
  begin
   print ' - internal.event_message_context table already exists.'
  end
-
 print ''
 
 print 'internal.event_messages table'

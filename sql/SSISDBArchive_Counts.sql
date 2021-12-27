@@ -2,7 +2,7 @@ Use SSISDBArchive
 go
 
 Select Count(*) As OperationsCount
-From SSISDBArchive.SSISDBArchive.internal.operations
+From SSISDBArchive.internal.operations
 
 Select Count(*) As ExecutablesCount
 From SSISDBArchive.internal.executables
