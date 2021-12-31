@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="3-internal execution_parameter_values"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{A654DD65-CBFD-4FBB-AB31-1DE91C4CBC92}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{0E79FC3F-DC97-4C6A-994D-8598A473946A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -428,8 +428,7 @@ where [refTable].[execution_parameter_id] = ?</property>
                       lineageId="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values.Outputs[OLE DB Source Output].Columns[parameter_name]" />
                     <inputColumn
                       refId="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values.Inputs[OLE DB Destination Input].Columns[parameter_value]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
+                      cachedDataType="nText"
                       cachedName="parameter_value"
                       externalMetadataColumnId="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values.Inputs[OLE DB Destination Input].ExternalColumns[parameter_value]"
                       lineageId="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values.Outputs[OLE DB Source Output].Columns[parameter_value]" />
@@ -474,13 +473,13 @@ where [refTable].[execution_parameter_id] = ?</property>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values.Inputs[OLE DB Destination Input].ExternalColumns[execution_id]"
-                      dataType="i8"
-                      name="execution_id" />
-                    <externalMetadataColumn
                       refId="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values.Inputs[OLE DB Destination Input].ExternalColumns[execution_parameter_id]"
                       dataType="i8"
                       name="execution_parameter_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values.Inputs[OLE DB Destination Input].ExternalColumns[execution_id]"
+                      dataType="i8"
+                      name="execution_id" />
                     <externalMetadataColumn
                       refId="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values.Inputs[OLE DB Destination Input].ExternalColumns[object_type]"
                       dataType="i2"
@@ -674,11 +673,10 @@ From [internal].[execution_parameter_values]</property>
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values.Outputs[OLE DB Source Output].Columns[parameter_value]"
-                      dataType="wstr"
+                      dataType="nText"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values.Outputs[OLE DB Source Output].ExternalColumns[parameter_value]"
-                      length="255"
                       lineageId="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values.Outputs[OLE DB Source Output].Columns[parameter_value]"
                       name="parameter_value"
                       truncationRowDisposition="FailComponent" />
@@ -925,20 +923,20 @@ From [internal].[execution_parameter_values]</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="325,42"
-          Id="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values"
-          TopLeft="144.5,376.5" />
-        <NodeLayout
           Size="353,42"
           Id="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values"
-          TopLeft="130.5,70.5" />
+          TopLeft="130.5,73.5" />
         <NodeLayout
           Size="186,42"
           Id="Package\DFT internal_execution_parameter_values\LkUp New Rows Only"
-          TopLeft="214,172.5" />
+          TopLeft="214,175.5" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\DFT internal_execution_parameter_values\LkUp etl_execution_id"
+          TopLeft="213.5,277.5" />
         <EdgeLayout
           Id="Package\DFT internal_execution_parameter_values.Paths[OLE DB Source Output]"
-          TopLeft="307,112.5">
+          TopLeft="307,115.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -958,13 +956,9 @@ From [internal].[execution_parameter_values]</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="187,42"
-          Id="Package\DFT internal_execution_parameter_values\LkUp etl_execution_id"
-          TopLeft="213.5,274.5" />
         <EdgeLayout
           Id="Package\DFT internal_execution_parameter_values.Paths[Lookup No Match Output]"
-          TopLeft="307,214.5">
+          TopLeft="307,217.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -986,9 +980,13 @@ From [internal].[execution_parameter_values]</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="325,42"
+          Id="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values"
+          TopLeft="144.5,379.5" />
         <EdgeLayout
           Id="Package\DFT internal_execution_parameter_values.Paths[Lookup Match Output]"
-          TopLeft="307,316.5">
+          TopLeft="307,319.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1013,19 +1011,6 @@ From [internal].[execution_parameter_values]</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT internal_execution_parameter_values\OLEDBSrc Select internal_execution_parameter_values">
     <Properties>
@@ -1063,7 +1048,7 @@ From [internal].[execution_parameter_values]</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1073,10 +1058,23 @@ From [internal].[execution_parameter_values]</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_execution_parameter_values\OLEDBDest internal_execution_parameter_values">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
