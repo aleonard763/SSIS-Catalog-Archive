@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="_SSISDBArchive_Controller"
   DTS:PackageType="5"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{CD1A560E-ACC4-47F6-BBA5-62FD876EEB24}">
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{9042AE65-E780-4873-8713-5E9F08B910E1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -418,81 +418,30 @@
       </DTS:Executables>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Seq 99"
+      DTS:refId="Package\Seq 5"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
       DTS:DTSID="{950B3EA2-356D-4C3C-BE4D-510195BAF749}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Seq 99">
+      DTS:ObjectName="Seq 5">
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Seq 99\SQL Reset etl_executable_id Status_Flag"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{ae6b86d7-203a-406a-ad6b-32d68ea514e7}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:refId="Package\Seq 5\EPT 5-reset_etl_tables"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{437ED780-7BA6-4277-9657-2BCD4A3F0973}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
           DTS:LocaleID="-1"
-          DTS:ObjectName="SQL Reset etl_executable_id Status_Flag"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ObjectName="EPT 5-reset_etl_tables"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}"
-              SQLTask:SqlStatementSource="Update etl.executable_id&#xA;Set [status_flag] = 'P'&#xA;Where [status_flag] = 'N'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Seq 99\SQL Reset etl_execution_id Status_Flag"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{b2dd7d98-7874-4c18-aa17-8a971be5a8c0}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="SQL Reset etl_execution_id Status_Flag"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}"
-              SQLTask:SqlStatementSource="Update etl.execution_id&#xA;Set [status_flag] = 'P'&#xA;Where [status_flag] = 'N'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Seq 99\SQL Reset etl_operation_id Status_Flag"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{8EF7149F-F113-40FD-B512-DA447AE5F24F}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="SQL Reset etl_operation_id Status_Flag"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}"
-              SQLTask:SqlStatementSource="Update etl.operation_id&#xA;Set [status_flag] = 'P'&#xA;Where [status_flag] = 'N'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Seq 99\SQL Reset etl_validation_id Status_Flag"
-          DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:Description="Execute SQL Task"
-          DTS:DTSID="{8cd15519-acc9-473e-b21c-b7c2896ad1ec}"
-          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="SQL Reset etl_validation_id Status_Flag"
-          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <SQLTask:SqlTaskData
-              SQLTask:Connection="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}"
-              SQLTask:SqlStatementSource="Update etl.validation_id&#xA;Set [status_flag] = 'P'&#xA;Where [status_flag] = 'N'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>5-reset_etl_tables.dtsx</PackageName>
+            </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -530,7 +479,7 @@
       DTS:From="Package\Seq 4"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Seq 99" />
+      DTS:To="Package\Seq 5" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
@@ -551,7 +500,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="199,42"
           Id="Package\Seq 0\EPT 0-etl_executable_id"
@@ -668,27 +617,15 @@
           Id="Package\Seq 4"
           TopLeft="193.692307692308,1201.5" />
         <NodeLayout
-          Size="283,42"
-          Id="Package\Seq 99\SQL Reset etl_executable_id Status_Flag"
-          TopLeft="318,28" />
-        <NodeLayout
-          Size="277,42"
-          Id="Package\Seq 99\SQL Reset etl_execution_id Status_Flag"
-          TopLeft="18,86" />
-        <NodeLayout
-          Size="276,42"
-          Id="Package\Seq 99\SQL Reset etl_operation_id Status_Flag"
-          TopLeft="22,25" />
-        <NodeLayout
-          Size="283,42"
-          Id="Package\Seq 99\SQL Reset etl_validation_id Status_Flag"
-          TopLeft="318,86" />
+          Size="191,42"
+          Id="Package\Seq 5\EPT 5-reset_etl_tables"
+          TopLeft="22,19" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="622,182"
           Size="622,225"
-          Id="Package\Seq 99"
+          Id="Package\Seq 5"
           TopLeft="261.692307692308,1438.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
