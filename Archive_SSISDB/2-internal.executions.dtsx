@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2-internal event_executions"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{4BFF7570-92E3-4031-BC42-0282EF7D7268}">
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{ACDA5E2B-0C38-430B-96F0-D3E20B288CC1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -32,11 +32,11 @@
           version="1">
           <components>
             <component
-              refId="Package\DFT internal_executions\LkUp etl_execution_is"
+              refId="Package\DFT internal_executions\LkUp etl_execution_id"
               componentClassID="Microsoft.Lookup"
               contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
               description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="LkUp etl_execution_is"
+              name="LkUp etl_execution_id"
               usesDispositions="true"
               version="6">
               <properties>
@@ -104,7 +104,7 @@ where [refTable].[execution_id] = ?</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\DFT internal_executions\LkUp etl_execution_is.Connections[OleDbConnection]"
+                  refId="Package\DFT internal_executions\LkUp etl_execution_id.Connections[OleDbConnection]"
                   connectionManagerID="{8AA588B1-FDC4-4D91-B503-AF60BAA33E37}:external"
                   connectionManagerRefId="Project.ConnectionManagers[ArchiveSSISDB.OLEDB]"
                   description="Connection manager used to access lookup data."
@@ -112,11 +112,11 @@ where [refTable].[execution_id] = ?</property>
               </connections>
               <inputs>
                 <input
-                  refId="Package\DFT internal_executions\LkUp etl_execution_is.Inputs[Lookup Input]"
+                  refId="Package\DFT internal_executions\LkUp etl_execution_id.Inputs[Lookup Input]"
                   name="Lookup Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\DFT internal_executions\LkUp etl_execution_is.Inputs[Lookup Input].Columns[execution_id]"
+                      refId="Package\DFT internal_executions\LkUp etl_execution_id.Inputs[Lookup Input].Columns[execution_id]"
                       cachedDataType="i8"
                       cachedName="execution_id"
                       lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[execution_id]">
@@ -137,39 +137,39 @@ where [refTable].[execution_id] = ?</property>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Match Output]"
+                  refId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="IgnoreFailure"
+                  errorRowDisposition="RedirectRow"
                   exclusionGroup="1"
                   name="Lookup Match Output"
-                  synchronousInputId="Package\DFT internal_executions\LkUp etl_execution_is.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DFT internal_executions\LkUp etl_execution_id.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup No Match Output]"
+                  refId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup No Match Output]"
                   description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
                   exclusionGroup="1"
                   name="Lookup No Match Output"
-                  synchronousInputId="Package\DFT internal_executions\LkUp etl_execution_is.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DFT internal_executions\LkUp etl_execution_id.Inputs[Lookup Input]">
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Error Output]"
+                  refId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Lookup Error Output"
-                  synchronousInputId="Package\DFT internal_executions\LkUp etl_execution_is.Inputs[Lookup Input]">
+                  synchronousInputId="Package\DFT internal_executions\LkUp etl_execution_id.Inputs[Lookup Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      refId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      lineageId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      refId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -290,6 +290,22 @@ where [refTable].[execution_id] = ?</property>
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\DFT internal_executions\LkUp New Rows Only.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_executions\LkUp New Rows Only.Outputs[Lookup Match Output].Columns[execution_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT internal_executions\LkUp New Rows Only.Outputs[Lookup Match Output].Columns[execution_id]"
+                      name="execution_id"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">execution_id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
@@ -937,16 +953,559 @@ From [internal].[executions]</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\DFT internal_executions\UN Dummy"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="UN Dummy"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[execution_id]"
+                      cachedDataType="i8"
+                      cachedName="execution_id"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[execution_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[folder_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="folder_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[folder_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[project_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="project_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[project_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[package_name]"
+                      cachedDataType="wstr"
+                      cachedLength="260"
+                      cachedName="package_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[package_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[package_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[reference_id]"
+                      cachedDataType="i8"
+                      cachedName="reference_id"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[reference_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[reference_type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="reference_type"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[reference_type]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_type]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[environment_folder_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="environment_folder_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[environment_folder_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_folder_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[environment_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="environment_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[environment_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[project_lsn]"
+                      cachedDataType="i8"
+                      cachedName="project_lsn"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[project_lsn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[executed_as_sid]"
+                      cachedDataType="bytes"
+                      cachedLength="85"
+                      cachedName="executed_as_sid"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[executed_as_sid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_sid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[executed_as_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="executed_as_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[executed_as_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[use32bitruntime]"
+                      cachedDataType="bool"
+                      cachedName="use32bitruntime"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[use32bitruntime]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[job_id]"
+                      cachedDataType="guid"
+                      cachedName="job_id"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[job_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[job_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\DFT internal_executions\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\DFT internal_executions\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[execution_id]"
+                      cachedDataType="i8"
+                      cachedName="execution_id"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[execution_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[folder_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="folder_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[folder_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[project_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="project_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[project_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[package_name]"
+                      cachedDataType="wstr"
+                      cachedLength="260"
+                      cachedName="package_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[package_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[package_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[reference_id]"
+                      cachedDataType="i8"
+                      cachedName="reference_id"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[reference_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[reference_type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="reference_type"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[reference_type]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_type]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[environment_folder_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="environment_folder_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[environment_folder_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_folder_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[environment_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="environment_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[environment_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[project_lsn]"
+                      cachedDataType="i8"
+                      cachedName="project_lsn"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[project_lsn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[executed_as_sid]"
+                      cachedDataType="bytes"
+                      cachedLength="85"
+                      cachedName="executed_as_sid"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[executed_as_sid]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_sid]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[executed_as_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="executed_as_name"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[executed_as_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[use32bitruntime]"
+                      cachedDataType="bool"
+                      cachedName="use32bitruntime"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[use32bitruntime]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[job_id]"
+                      cachedDataType="guid"
+                      cachedName="job_id"
+                      lineageId="Package\DFT internal_executions\OLEDBSrc Select internal_executions.Outputs[OLE DB Source Output].Columns[job_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[job_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]"
+                      name="execution_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]"
+                      name="folder_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_name]"
+                      name="project_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[package_name]"
+                      dataType="wstr"
+                      length="260"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[package_name]"
+                      name="package_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]"
+                      name="reference_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[reference_type]"
+                      name="reference_type" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_folder_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_folder_name]"
+                      name="environment_folder_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[environment_name]"
+                      name="environment_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]"
+                      name="project_lsn" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_sid]"
+                      dataType="bytes"
+                      length="85"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_sid]"
+                      name="executed_as_sid" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[executed_as_name]"
+                      name="executed_as_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]"
+                      dataType="bool"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]"
+                      name="use32bitruntime" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[job_id]"
+                      dataType="guid"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[job_id]"
+                      name="job_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      name="ErrorCode" />
+                    <outputColumn
+                      refId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_executions\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      name="ErrorColumn" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\DFT internal_executions.Paths[Lookup Error Output]"
+              endId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 1]"
+              name="Lookup Error Output"
+              startId="Package\DFT internal_executions\LkUp New Rows Only.Outputs[Lookup Error Output]" />
+            <path
+              refId="Package\DFT internal_executions.Paths[Lookup Error Output1]"
+              endId="Package\DFT internal_executions\UN Dummy.Inputs[Union All Input 2]"
+              name="Lookup Error Output"
+              startId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Error Output]" />
             <path
               refId="Package\DFT internal_executions.Paths[Lookup Match Output]"
               endId="Package\DFT internal_executions\OLEDBDest internal_executions.Inputs[OLE DB Destination Input]"
               name="Lookup Match Output"
-              startId="Package\DFT internal_executions\LkUp etl_execution_is.Outputs[Lookup Match Output]" />
+              startId="Package\DFT internal_executions\LkUp etl_execution_id.Outputs[Lookup Match Output]" />
             <path
               refId="Package\DFT internal_executions.Paths[Lookup No Match Output]"
-              endId="Package\DFT internal_executions\LkUp etl_execution_is.Inputs[Lookup Input]"
+              endId="Package\DFT internal_executions\LkUp etl_execution_id.Inputs[Lookup Input]"
               name="Lookup No Match Output"
               startId="Package\DFT internal_executions\LkUp New Rows Only.Outputs[Lookup No Match Output]" />
             <path
@@ -982,11 +1541,7 @@ From [internal].[executions]</property>
     design-time-name="Package\DFT internal_executions">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="264,42"
-          Id="Package\DFT internal_executions\OLEDBSrc Select internal_executions"
-          TopLeft="213.5,100.5" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="237,42"
           Id="Package\DFT internal_executions\OLEDBDest internal_executions"
@@ -995,32 +1550,14 @@ From [internal].[executions]</property>
           Size="186,42"
           Id="Package\DFT internal_executions\LkUp New Rows Only"
           TopLeft="252.5,202.5" />
-        <EdgeLayout
-          Id="Package\DFT internal_executions.Paths[OLE DB Source Output]"
-          TopLeft="345.5,142.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="187,42"
-          Id="Package\DFT internal_executions\LkUp etl_execution_is"
+          Id="Package\DFT internal_executions\LkUp etl_execution_id"
           TopLeft="252,304.5" />
+        <NodeLayout
+          Size="264,42"
+          Id="Package\DFT internal_executions\OLEDBSrc Select internal_executions"
+          TopLeft="213.5,100.5" />
         <EdgeLayout
           Id="Package\DFT internal_executions.Paths[Lookup No Match Output]"
           TopLeft="345.5,244.5">
@@ -1069,17 +1606,107 @@ From [internal].[executions]</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_executions.Paths[OLE DB Source Output]"
+          TopLeft="345.5,142.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136,42"
+          Id="Package\DFT internal_executions\UN Dummy"
+          TopLeft="662,260" />
+        <EdgeLayout
+          Id="Package\DFT internal_executions.Paths[Lookup Error Output]"
+          TopLeft="438.5,223.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="223.5,51.8333333333333"
+              Start="0,0"
+              End="216,51.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="125.178899082569,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="125.178899082569,0"
+                    Point2="129.178899082569,0"
+                    Point3="129.178899082569,4" />
+                  <mssgle:LineSegment
+                    End="129.178899082569,47.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="129.178899082569,47.8333333333333"
+                    Point2="129.178899082569,51.8333333333333"
+                    Point3="133.178899082569,51.8333333333333" />
+                  <mssgle:LineSegment
+                    End="216,51.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="83.3125123638189,-17.609375,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_executions.Paths[Lookup Error Output1]"
+          TopLeft="439,325.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="223,-38.8333333333333"
+              Start="0,0"
+              End="215.5,-38.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="124.889908256881,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="124.889908256881,0"
+                    Point2="128.889908256881,0"
+                    Point3="128.889908256881,-4" />
+                  <mssgle:LineSegment
+                    End="128.889908256881,-34.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128.889908256881,-34.8333333333333"
+                    Point2="128.889908256881,-38.8333333333333"
+                    Point3="132.889908256881,-38.8333333333333" />
+                  <mssgle:LineSegment
+                    End="215.5,-38.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="83.0235215381308,1,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT internal_executions\OLEDBSrc Select internal_executions">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT internal_executions\OLEDBDest internal_executions">
     <Properties>
@@ -1095,6 +1722,29 @@ From [internal].[executions]</property>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT internal_executions\LkUp New Rows Only">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_executions\LkUp etl_execution_id">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
@@ -1117,23 +1767,8 @@ From [internal].[executions]</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DFT internal_executions\LkUp etl_execution_is">
+    design-time-name="Package\DFT internal_executions\OLEDBSrc Select internal_executions">
     <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

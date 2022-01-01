@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="2-internal validations"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{3687E495-887B-4E85-A960-C5AA579ED566}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{11C05B43-2D0A-4263-B09E-9704FEF46A45}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -139,7 +139,7 @@ where [refTable].[validation_id] = ?</property>
                 <output
                   refId="Package\DFT internal_validations\LkUp etl_validation_id.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="IgnoreFailure"
+                  errorRowDisposition="RedirectRow"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\DFT internal_validations\LkUp etl_validation_id.Inputs[Lookup Input]">
@@ -290,6 +290,22 @@ where [refTable].[validation_id] = ?</property>
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\DFT internal_validations\LkUp New Rows Only.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_validations\LkUp New Rows Only.Outputs[Lookup Match Output].Columns[validation_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT internal_validations\LkUp New Rows Only.Outputs[Lookup Match Output].Columns[validation_id]"
+                      name="validation_id"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">validation_id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
@@ -806,8 +822,418 @@ From [internal].[validations]</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\DFT internal_validations\UN Dummy"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="UN Dummy"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[validation_id]"
+                      cachedDataType="i8"
+                      cachedName="validation_id"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[validation_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validation_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[environment_scope]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="environment_scope"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[environment_scope]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[environment_scope]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[validate_type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="validate_type"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[validate_type]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validate_type]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[folder_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="folder_name"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[folder_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[project_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="project_name"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[project_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[project_lsn]"
+                      cachedDataType="i8"
+                      cachedName="project_lsn"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[project_lsn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[use32bitruntime]"
+                      cachedDataType="bool"
+                      cachedName="use32bitruntime"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[use32bitruntime]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[reference_id]"
+                      cachedDataType="i8"
+                      cachedName="reference_id"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[reference_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[job_id]"
+                      cachedDataType="guid"
+                      cachedName="job_id"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[job_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[job_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\DFT internal_validations\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\DFT internal_validations\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[validation_id]"
+                      cachedDataType="i8"
+                      cachedName="validation_id"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[validation_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validation_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[environment_scope]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="environment_scope"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[environment_scope]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[environment_scope]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[validate_type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="validate_type"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[validate_type]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validate_type]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[folder_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="folder_name"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[folder_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[project_name]"
+                      cachedDataType="wstr"
+                      cachedLength="128"
+                      cachedName="project_name"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[project_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[project_lsn]"
+                      cachedDataType="i8"
+                      cachedName="project_lsn"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[project_lsn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[use32bitruntime]"
+                      cachedDataType="bool"
+                      cachedName="use32bitruntime"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[use32bitruntime]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[reference_id]"
+                      cachedDataType="i8"
+                      cachedName="reference_id"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[reference_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[job_id]"
+                      cachedDataType="guid"
+                      cachedName="job_id"
+                      lineageId="Package\DFT internal_validations\OLEDBSrc Select internal_validations.Outputs[OLE DB Source Output].Columns[job_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[job_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\DFT internal_validations\LkUp etl_validation_id.Outputs[Lookup Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\DFT internal_validations\LkUp etl_validation_id.Outputs[Lookup Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validation_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validation_id]"
+                      name="validation_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[environment_scope]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[environment_scope]"
+                      name="environment_scope" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validate_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[validate_type]"
+                      name="validate_type" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[folder_name]"
+                      name="folder_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_name]"
+                      dataType="wstr"
+                      length="128"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_name]"
+                      name="project_name" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[project_lsn]"
+                      name="project_lsn" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]"
+                      dataType="bool"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[use32bitruntime]"
+                      name="use32bitruntime" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[reference_id]"
+                      name="reference_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[job_id]"
+                      dataType="guid"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[job_id]"
+                      name="job_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      name="ErrorCode" />
+                    <outputColumn
+                      refId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_validations\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      name="ErrorColumn" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\DFT internal_validations.Paths[Lookup Error Output]"
+              endId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 1]"
+              name="Lookup Error Output"
+              startId="Package\DFT internal_validations\LkUp New Rows Only.Outputs[Lookup Error Output]" />
+            <path
+              refId="Package\DFT internal_validations.Paths[Lookup Error Output1]"
+              endId="Package\DFT internal_validations\UN Dummy.Inputs[Union All Input 2]"
+              name="Lookup Error Output"
+              startId="Package\DFT internal_validations\LkUp etl_validation_id.Outputs[Lookup Error Output]" />
             <path
               refId="Package\DFT internal_validations.Paths[Lookup Match Output]"
               endId="Package\DFT internal_validations\OLEDBDest internal_validations.Inputs[OLE DB Destination Input]"
@@ -851,11 +1277,7 @@ From [internal].[validations]</property>
     design-time-name="Package\DFT internal_validations">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="264,42"
-          Id="Package\DFT internal_validations\OLEDBSrc Select internal_validations"
-          TopLeft="137.5,63.5" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="236,42"
           Id="Package\DFT internal_validations\OLEDBDest internal_validations"
@@ -864,56 +1286,14 @@ From [internal].[validations]</property>
           Size="186,42"
           Id="Package\DFT internal_validations\LkUp New Rows Only"
           TopLeft="176.5,165.5" />
-        <EdgeLayout
-          Id="Package\DFT internal_validations.Paths[OLE DB Source Output]"
-          TopLeft="269.5,105.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="187,42"
           Id="Package\DFT internal_validations\LkUp etl_validation_id"
           TopLeft="176,267.5" />
-        <EdgeLayout
-          Id="Package\DFT internal_validations.Paths[Lookup No Match Output]"
-          TopLeft="269.5,207.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-55.80638671875,20.4453125,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="264,42"
+          Id="Package\DFT internal_validations\OLEDBSrc Select internal_validations"
+          TopLeft="137.5,63.5" />
         <EdgeLayout
           Id="Package\DFT internal_validations.Paths[Lookup Match Output]"
           TopLeft="269.5,309.5">
@@ -938,17 +1318,131 @@ From [internal].[validations]</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_validations.Paths[OLE DB Source Output]"
+          TopLeft="269.5,105.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_validations.Paths[Lookup No Match Output]"
+          TopLeft="269.5,207.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,20.4453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136,42"
+          Id="Package\DFT internal_validations\UN Dummy"
+          TopLeft="570,228" />
+        <EdgeLayout
+          Id="Package\DFT internal_validations.Paths[Lookup Error Output]"
+          TopLeft="362.5,186.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="207.5,62.5"
+              Start="0,0"
+              End="200,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="99.75,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="99.75,0"
+                    Point2="103.75,0"
+                    Point3="103.75,4" />
+                  <mssgle:LineSegment
+                    End="103.75,58.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="103.75,58.5"
+                    Point2="103.75,62.5"
+                    Point3="107.75,62.5" />
+                  <mssgle:LineSegment
+                    End="200,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="57.88361328125,-17.609375,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_validations.Paths[Lookup Error Output1]"
+          TopLeft="363,288.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="207,-33.8333333333333"
+              Start="0,0"
+              End="199.5,-33.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="115.642201834862,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="115.642201834862,0"
+                    Point2="119.642201834862,0"
+                    Point3="119.642201834862,-4" />
+                  <mssgle:LineSegment
+                    End="119.642201834862,-29.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="119.642201834862,-29.8333333333333"
+                    Point2="119.642201834862,-33.8333333333333"
+                    Point3="123.642201834862,-33.8333333333333" />
+                  <mssgle:LineSegment
+                    End="199.5,-33.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="73.7758151161123,1,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT internal_validations\OLEDBSrc Select internal_validations">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT internal_validations\OLEDBDest internal_validations">
     <Properties>
@@ -968,7 +1462,7 @@ From [internal].[validations]</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -991,7 +1485,7 @@ From [internal].[validations]</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1001,8 +1495,16 @@ From [internal].[validations]</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_validations\OLEDBSrc Select internal_validations">
+    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="3-internal execution_property_override_values"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{D881705C-861B-4A3C-AF9A-0B9F7C3B9DE8}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{92B13F96-B09B-464F-BBE4-DE92FD05B521}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -139,7 +139,7 @@ where [refTable].[execution_id] = ?</property>
                 <output
                   refId="Package\DFT internal_execution_property_override_values\LkUp etl_execution_id.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="IgnoreFailure"
+                  errorRowDisposition="RedirectRow"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\DFT internal_execution_property_override_values\LkUp etl_execution_id.Inputs[Lookup Input]">
@@ -288,6 +288,22 @@ where [refTable].[property_id] = ?</property>
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\DFT internal_execution_property_override_values\LkUp New Rows Only.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\LkUp New Rows Only.Outputs[Lookup Match Output].Columns[property_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DFT internal_execution_property_override_values\LkUp New Rows Only.Outputs[Lookup Match Output].Columns[property_id]"
+                      name="property_id"
+                      truncationRowDisposition="RedirectRow">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">property_id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
@@ -692,8 +708,310 @@ From [internal].[execution_property_override_values]</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\DFT internal_execution_property_override_values\UN Dummy"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="UN Dummy"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[execution_id]"
+                      cachedDataType="i8"
+                      cachedName="execution_id"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[execution_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[sensitive]"
+                      cachedDataType="bool"
+                      cachedName="sensitive"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[sensitive]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[property_id]"
+                      cachedDataType="i8"
+                      cachedName="property_id"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[property_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[property_path]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="property_path"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[property_path]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_path]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[property_value]"
+                      cachedDataType="nText"
+                      cachedName="property_value"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[property_value]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_value]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[sensitive_property_value]"
+                      cachedDataType="image"
+                      cachedName="sensitive_property_value"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[sensitive_property_value]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive_property_value]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\DFT internal_execution_property_override_values\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\DFT internal_execution_property_override_values\LkUp New Rows Only.Outputs[Lookup Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[execution_id]"
+                      cachedDataType="i8"
+                      cachedName="execution_id"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[execution_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[sensitive]"
+                      cachedDataType="bool"
+                      cachedName="sensitive"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[sensitive]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[property_id]"
+                      cachedDataType="i8"
+                      cachedName="property_id"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[property_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[property_path]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="property_path"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[property_path]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_path]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[property_value]"
+                      cachedDataType="nText"
+                      cachedName="property_value"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[property_value]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_value]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[sensitive_property_value]"
+                      cachedDataType="image"
+                      cachedName="sensitive_property_value"
+                      lineageId="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values.Outputs[OLE DB Source Output].Columns[sensitive_property_value]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive_property_value]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\DFT internal_execution_property_override_values\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorCode]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\DFT internal_execution_property_override_values\LkUp etl_execution_id.Outputs[Lookup Error Output].Columns[ErrorColumn]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[execution_id]"
+                      name="execution_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive]"
+                      dataType="bool"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive]"
+                      name="sensitive" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_id]"
+                      dataType="i8"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_id]"
+                      name="property_id" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_path]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_path]"
+                      name="property_path" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_value]"
+                      dataType="nText"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[property_value]"
+                      name="property_value" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive_property_value]"
+                      dataType="image"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[sensitive_property_value]"
+                      name="sensitive_property_value" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorCode]"
+                      name="ErrorCode" />
+                    <outputColumn
+                      refId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT internal_execution_property_override_values\UN Dummy.Outputs[Union All Output 1].Columns[ErrorColumn]"
+                      name="ErrorColumn" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
           <paths>
+            <path
+              refId="Package\DFT internal_execution_property_override_values.Paths[Lookup Error Output]"
+              endId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 1]"
+              name="Lookup Error Output"
+              startId="Package\DFT internal_execution_property_override_values\LkUp New Rows Only.Outputs[Lookup Error Output]" />
+            <path
+              refId="Package\DFT internal_execution_property_override_values.Paths[Lookup Error Output1]"
+              endId="Package\DFT internal_execution_property_override_values\UN Dummy.Inputs[Union All Input 2]"
+              name="Lookup Error Output"
+              startId="Package\DFT internal_execution_property_override_values\LkUp etl_execution_id.Outputs[Lookup Error Output]" />
             <path
               refId="Package\DFT internal_execution_property_override_values.Paths[Lookup Match Output]"
               endId="Package\DFT internal_execution_property_override_values\OLEDBDest internal_execution_property_override_values.Inputs[OLE DB Destination Input]"
@@ -737,11 +1055,7 @@ From [internal].[execution_property_override_values]</property>
     design-time-name="Package\DFT internal_execution_property_override_values">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="389,42"
-          Id="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values"
-          TopLeft="117.5,65.5" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="361,42"
           Id="Package\DFT internal_execution_property_override_values\OLEDBDest internal_execution_property_override_values"
@@ -750,32 +1064,14 @@ From [internal].[execution_property_override_values]</property>
           Size="186,42"
           Id="Package\DFT internal_execution_property_override_values\LkUp New Rows Only"
           TopLeft="219,167.5" />
-        <EdgeLayout
-          Id="Package\DFT internal_execution_property_override_values.Paths[OLE DB Source Output]"
-          TopLeft="312,107.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="187,42"
           Id="Package\DFT internal_execution_property_override_values\LkUp etl_execution_id"
           TopLeft="218.5,269.5" />
+        <NodeLayout
+          Size="389,42"
+          Id="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values"
+          TopLeft="117.5,65.5" />
         <EdgeLayout
           Id="Package\DFT internal_execution_property_override_values.Paths[Lookup No Match Output]"
           TopLeft="312,209.5">
@@ -824,17 +1120,107 @@ From [internal].[execution_property_override_values]</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_execution_property_override_values.Paths[OLE DB Source Output]"
+          TopLeft="312,107.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="136,42"
+          Id="Package\DFT internal_execution_property_override_values\UN Dummy"
+          TopLeft="596,221" />
+        <EdgeLayout
+          Id="Package\DFT internal_execution_property_override_values.Paths[Lookup Error Output]"
+          TopLeft="405,188.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="191,47.8333333333333"
+              Start="0,0"
+              End="183.5,47.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="106.394495412844,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="106.394495412844,0"
+                    Point2="110.394495412844,0"
+                    Point3="110.394495412844,4" />
+                  <mssgle:LineSegment
+                    End="110.394495412844,43.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="110.394495412844,43.8333333333333"
+                    Point2="110.394495412844,47.8333333333333"
+                    Point3="114.394495412844,47.8333333333333" />
+                  <mssgle:LineSegment
+                    End="183.5,47.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="64.528108694094,-17.609375,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT internal_execution_property_override_values.Paths[Lookup Error Output1]"
+          TopLeft="405.5,290.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="190.5,-42.8333333333333"
+              Start="0,0"
+              End="183,-42.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="106.105504587156,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="106.105504587156,0"
+                    Point2="110.105504587156,0"
+                    Point3="110.105504587156,-4" />
+                  <mssgle:LineSegment
+                    End="110.105504587156,-38.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="110.105504587156,-38.8333333333333"
+                    Point2="110.105504587156,-42.8333333333333"
+                    Point3="114.105504587156,-42.8333333333333" />
+                  <mssgle:LineSegment
+                    End="183,-42.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="64.2391178684059,1,91.7327734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT internal_execution_property_override_values\OLEDBDest internal_execution_property_override_values">
     <Properties>
@@ -854,7 +1240,7 @@ From [internal].[execution_property_override_values]</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:string">false</Value>
+          type="q2:boolean">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -877,7 +1263,7 @@ From [internal].[execution_property_override_values]</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -887,8 +1273,16 @@ From [internal].[execution_property_override_values]</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT internal_execution_property_override_values\OLEDBSrc Select internal_execution_property_override_values">
+    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
