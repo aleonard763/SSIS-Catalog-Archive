@@ -44,7 +44,7 @@ print ''
 declare @tblPkg table(PackageID int)
 
 /* Util/Archive_SSISDB/0-etl.executable_id.dtsx */
-declare @PackageName nvarchar(260) = N'0-etl.executable_id.dtsx.dtsx'
+declare @PackageName nvarchar(260) = N'0-etl.executable_id.dtsx'
 declare @ProjectName nvarchar(128) = N'Archive_SSISDB'
 declare @FolderName nvarchar(128) = N'Util'
 declare @ExecutionOrder int = 10
